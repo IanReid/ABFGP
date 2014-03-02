@@ -8,8 +8,8 @@ from os.path import join as osPathJoin
 ################################################################################
 # Main ABGP directory
 ################################################################################
-MAIN_ABGP_PATH         = "/home/avdb/code/abfgp-2.0/"               # ADJUST TO YOUR PERSONAL SYSTEM
-ABGP_OUTDIR_PATH       = "/tmp"                                     # ADJUST TO YOUR PERSONAL SYSTEM; e.g. /tmp/abfgp/results
+MAIN_ABGP_PATH         = "/home/ian/python/ABFGP/abfgp-2.f/"               # ADJUST TO YOUR PERSONAL SYSTEM
+ABGP_OUTDIR_PATH       = "/home/ian/tmp/abfgp/results"                                     # ADJUST TO YOUR PERSONAL SYSTEM; e.g. /tmp/abfgp/results
 
 # decorative variable used e.g. in GFF fsource
 ABGP_PROGRAM_NAME      = "abfgp"
