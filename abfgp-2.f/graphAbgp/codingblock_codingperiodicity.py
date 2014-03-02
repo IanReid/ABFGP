@@ -3,7 +3,7 @@ Coding periodicity functions for CodingBlockGraphs
 """
 
 # graphAbgp Imports
-from exceptions import NoOverallMinimalSpanningRange
+from abgp_exceptions import NoOverallMinimalSpanningRange
 
 # ABFGP Imports
 from lib_sequenceperiodicity import codon_nucleotide_conservation

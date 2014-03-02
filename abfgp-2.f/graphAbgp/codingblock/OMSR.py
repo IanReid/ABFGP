@@ -12,7 +12,7 @@ from sets import Set
 from copy import deepcopy
 
 # graphAbgp import
-from graphAbgp.exceptions import OrganismNotPresentInGraph
+from abgp_exceptions import OrganismNotPresentInGraph
 
 # MINSR imports
 from MINSR import (

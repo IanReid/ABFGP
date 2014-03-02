@@ -8,7 +8,7 @@ __license__ = "MIT"
 
 
 # graphAbgp import
-from graphAbgp.exceptions import InproperlyAppliedArgument
+from abgp_exceptions import InproperlyAppliedArgument
 
 # Abgp imports
 from abgp_warnings import UnexpectedEventWarning

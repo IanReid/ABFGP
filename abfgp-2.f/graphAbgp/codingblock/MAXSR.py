@@ -11,7 +11,7 @@ __license__ = "MIT"
 from sets import Set
 
 # graphAbgp import
-from graphAbgp.exceptions import OrganismNotPresentInGraph
+from abgp_exceptions import OrganismNotPresentInGraph
 
 # MINSR imports
 from MINSR import (

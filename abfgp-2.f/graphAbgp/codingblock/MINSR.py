@@ -7,7 +7,7 @@ Related to Minimal Spanning Range ( MINSR / MSR )
 from sets import Set
 
 # graphAbgp import
-from graphAbgp.exceptions import OrganismNotPresentInGraph
+from abgp_exceptions import OrganismNotPresentInGraph
 
 # Module metadata
 __authors__ = "Ate van der Burgt"

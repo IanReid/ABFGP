@@ -3,7 +3,7 @@ Functions for improving CBGs in the GSG
 """
 
 # graphAbgp Imports
-from exceptions import NoOverallMinimalSpanningRange
+from abgp_exceptions import NoOverallMinimalSpanningRange
 
 # Abgp Imports
 import lib_cexpander
