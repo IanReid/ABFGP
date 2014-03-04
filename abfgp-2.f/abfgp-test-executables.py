@@ -55,7 +55,7 @@ for varname in dir():
     if varname.find("_TCODE_") > 0: continue
 
     # remove varname from required_executable_names;
-    # check at the end if all required_executable_names are dealth with
+    # check at the end if all required_executable_names are dealt with
     if varname in required_executable_names:
         required_executable_names.remove(varname)
     
@@ -67,7 +67,7 @@ for varname in dir():
     if not os.path.exists(variable):
         print "False ... %30s -> %s [PATH DOES NOT EXIST]" % (varname,variable)
         continue
-    elif not os.access(variable, os.X_OK):
+    elif not (variable.endswith('.py') or os.access(variable, os.X_OK)):
         print "False ... %30s -> %s [PATH IS NOT EXECUTABLE]" % (varname,variable)
         continue
 
