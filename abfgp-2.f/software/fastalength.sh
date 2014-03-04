@@ -1,3 +1,4 @@
+#!/bin/bash
 # output !single fasta! sequence length
 if [ "$1" ]
 then
