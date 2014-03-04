@@ -12,7 +12,7 @@ __license__ = "MIT"
 from graphAbgp.subclass_sitealignment import sort_by_cumulative_score
 from graphAbgp.ordering import order_list_by_attribute
 from graphAbgp import conversion
-from graphAbgp.exceptions import OrganismNotPresentInGraph
+from abgp_exceptions import OrganismNotPresentInGraph
 
 # Other imports
 from lib_stopwatch import StopWatch

@@ -1,7 +1,7 @@
 """
 Validators for graphAbgp classes in Aligment Based Gene Prediction
 """
-from exceptions import InproperlyAppliedArgument
+from abgp_exceptions import InproperlyAppliedArgument
 
 def IsProperPhaseValidator(phase):
     """ """

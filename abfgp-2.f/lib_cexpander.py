@@ -10,7 +10,7 @@ __license__ = "MIT"
 from parsers.cexpander import *
 
 # ABGP imports
-from graphAbgp.exceptions import (
+from abgp_exceptions import (
     NoOverallMinimalSpanningRange,
     OrganismNotPresentInGraph
     )

@@ -122,7 +122,7 @@ from gff import parsegfffile
 
 import graphAbgp
 import graphPlus
-from graphAbgp.exceptions import OrganismNotPresentInGraph
+from abgp_exceptions import OrganismNotPresentInGraph
 from graphAbgp.graph_pacbpcollection import _delete_pacbp
 from graphAbgp.graph_pacbpcollection import pacbporf2PCG
 from graphAbgp.graph_codingblock import CodingBlockGraph

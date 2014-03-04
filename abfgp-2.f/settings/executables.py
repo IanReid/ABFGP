@@ -8,12 +8,12 @@ from os.path import join as osPathJoin
 from settings.abgp import MAIN_ABGP_PATH as BASEPATH
 
 # python
-PYTHON_PATH             = "/usr/bin/python2.6" # tested are 2.4, 2.6 and 2.7.4
-PYTHON_VERSION          = "python2.6.2"
+PYTHON_PATH             = "/usr/bin/python" # tested are 2.4, 2.6 and 2.7.4
+PYTHON_VERSION          = "python2.7.3"
 # emboss
-EMBOSS_EXECUTABLES_PATH = "/usr/bin"
+EMBOSS_EXECUTABLES_PATH = "/usr/local/bin"
 EMBOSS_DATA_DIRECTORY   = "/usr/share/EMBOSS/data"
-EMBOSS_VERSION          = "4.0.0"
+EMBOSS_VERSION          = "6.6.0"
 # perl
 PERL_PATH               = "perl"    # only required in case a MySQL GGB database is
                                     # coupled to store and visualize ABFGP output.
@@ -22,18 +22,18 @@ PERL_VERSION            = "?"       # not used at all.
 ################################################################################
 # Full paths to executables
 ################################################################################
-EXECUTABLE_BLASTALL     = osPathJoin(BASEPATH,"software/blast-2.2.8/blastall")
-EXECUTABLE_FORMATDB     = osPathJoin(BASEPATH,"software/blast-2.2.8/formatdb")
+EXECUTABLE_BLASTALL     = osPathJoin(BASEPATH,"software/blast-2.2.26/bin/blastall")
+EXECUTABLE_FORMATDB     = osPathJoin(BASEPATH,"software/blast-2.2.26/bin/formatdb")
 EXECUTABLE_GETORF       = osPathJoin(EMBOSS_EXECUTABLES_PATH,"getorf")
 EXECUTABLE_TCODE        = osPathJoin(EMBOSS_EXECUTABLES_PATH,"tcode")
 EXECUTABLE_TRANSEQ      = osPathJoin(EMBOSS_EXECUTABLES_PATH,"transeq")
-EXECUTABLE_CLUSTALW     = osPathJoin(BASEPATH,"software/clustalw-1.83/clustalw")
+EXECUTABLE_CLUSTALW     = osPathJoin(BASEPATH,"software/clustalw/clustalw2")
 EXECUTABLE_SIGNALP      = osPathJoin(BASEPATH,"software/signalp-3.0/signalp")
 EXECUTABLE_TMHMM        = osPathJoin(BASEPATH,"software/tmhmm-2.0/bin/tmhmm")
-EXECUTABLE_SFM          = osPathJoin(BASEPATH,"software/ScanForMatches/scan_for_matches")
-EXECUTABLE_HMMPATH      = osPathJoin(BASEPATH,"software/hmmer-2.3.2")
-EXECUTABLE_HMMSEARCH    = osPathJoin(EXECUTABLE_HMMPATH,"hmmsearch")
-EXECUTABLE_HMMBUILD     = osPathJoin(EXECUTABLE_HMMPATH,"hmmbuild")
+EXECUTABLE_SFM          = osPathJoin(BASEPATH,"software/scan_for_matches")
+EXECUTABLE_HMMPATH      = '/usr/local/bin'
+EXECUTABLE_HMMSEARCH    = '/usr/local/bin/hmmsearch'
+EXECUTABLE_HMMBUILD     = '/usr/local/bin/hmmbuild'
 
 EXECUTABLE_CEXPANDER_PATH       = osPathJoin(BASEPATH,"software/cexpander-1.0")
 EXECUTABLE_CEXPANDER_ALLVSALL   = osPathJoin(EXECUTABLE_CEXPANDER_PATH,

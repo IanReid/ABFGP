@@ -2,7 +2,7 @@
 Functions for printing analytic statistics of ABGP graphs
 """
 
-from exceptions import (
+from abgp_exceptions import (
     NoCodingBlockGraphApplied,
     NoGenestructureOfCodingBlockGraphsApplied,
     NoGeneTreeGraphApplied
