@@ -134,7 +134,7 @@ class AbgpGeneLocusDirectory:
         self.protein_file = None
         self.unigene_file = None
 
-        # set absolute path of directory to self.dirname
+        # store absolute path of directory to self.dirname
         self.dirname = os.path.abspath(dirname)
 
         # attribute that can hold (miscellaneous) gff data

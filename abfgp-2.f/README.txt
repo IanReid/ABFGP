@@ -121,7 +121,8 @@ New versions of blast could have issues.
 Most likely issues relate to the BioPython NCBIStandalone blast parser,
 that should be in sync with the version of blastall.
 
-Blast+ is not supported; exact content of HSP objects changed drastically (strand,frame,etc).
+Blast+ is not supported; 
+exact content of HSP objects changed drastically (strand,frame,etc).
 
 -- clustalw --
 Newer versions of clustalw are expected to have no issues (although not all were tested)
@@ -241,7 +242,9 @@ export PYTHONPATH=$PYTHONPATH:/your/path/to/abfgp-2.0; python abfgp-test-executa
 
 # This should print 18 lines which all start with ' True '
 # In case an executable can't be located, isn't executable or might have 
-# another flaw, it is reported here. Please take action prior to ABFGP usage.
+# another flaw, it is reported here. Some scripts and programs in the software
+# directory might need to have their executable flag set. Please take action before
+# using ABFGP.
 
 
 #####################################################################################
@@ -274,7 +277,7 @@ Optional, useful files are
 
 All gff files must refer to *absolute* coordinates; ABFGP does the math to recalculate
 the relative locus on the provided slice of genomic DNA of the informant locus.
-It is best shown by example. In the testdatafolder serveral full examples
+It is best shown by example. In the testdatafolder several full examples
 of orthologous groups of AbgpGeneLocusDirectories are provided. This is the
 content of testdata/exampleAbgpLocusDirs/CFU_827306/DOTSE_072982:
 
@@ -309,7 +312,7 @@ This is the content of the GFF files:
     scaffold_7      GenomeThreader  UGintron        265660  265725  .       -       .       UniGene isotig06737
     scaffold_7      GenomeThreader  UGintron        267287  267338  .       -       .       UniGene isotig06737
 
-As you can see, all coordinates refer to the absolute locus of the in informant gene locus.
+As you can see, all coordinates refer to the absolute locus of the informant gene locus.
 Provide only like this; ABFGP does the math to recalculate towards the provided slice of genomic DNA.
 For unigenes and genes, it is not required to provide GFF for its introns.
 NOTE: Use the literal GFF gclass 'gene_id' for gene models (or adjust GFF_GENE_GCLASS settings/gff/currentannotation.py).
@@ -379,14 +382,14 @@ rm Schizosaccharomyces_pombe.ASM294v2.20.dna.chromosome.*.fa;
 -------------------------------------------------------------------------------------------------------
 
 # specify fmethod names & settings
-organism_tag=spombe                 # usefull to recognize the source of your informant loci 
+organism_tag=spombe                 # useful to recognize the source of your informant loci
 fmethod_gene="protein_coding_gene"  # literal feature name in GFF's 3th column
 fmethod_transcript="transcript"     # literal feature name in GFF's 3th column
 fmethod_abfgpgene="gene"            # not required in ABFGP, but provide it for sake of completeness
 fmethod_abfgplocus="abgp_locus"     # feature name to translate to
 gclass_gene="gene_id"               # FF_GENE_GCLASS in settings/gff/currentannotation.py
-gene_locus_nt_flank=1000            # extent gene loci with extra flanking sequence.
-                                    # this is helpfull/required in case this
+gene_locus_nt_flank=1000            # extend gene loci with extra flanking sequence.
+                                    # this is helpful/required in case this
                                     # gene model is actually incorrect!
 
 # ABFGP works with GFF2. We advise to convert GFF3 to GFF2 first.
@@ -484,7 +487,7 @@ python abfgp.py --filewithloci testdata/exampleFilewithloci/CFU_840409.relativep
 
     The above three command lines are roughly similar.
     Biggest and very important and impacting difference, is that in the
-    first (--multifasta) style, only the target and informant gene loci are offert.
+    first (--multifasta) style, only the target and informant gene loci are offered.
     No prior knowledge on annotated gene models and/or aligned unigenes (as GFF)
     are offered. In the second two command lines (--dirwithloci and --filewithloci),
     AbgpGeneLocusDirectories are offered as input (see section 6. of this README).
@@ -516,19 +519,18 @@ python abfgp.py --filewithloci testdata/exampleFilewithloci/CFU_840409.relativep
     a unique folder name in the directory specified in
     settings/abgp.py: ABGP_OUTDIR_PATH
     
-    In the output GFF file, the re-annotated gene model is described fairly at the bottom.
-    The GFF file is highly decorated with information that could assist in the manual
+    In the output GFF file, the re-annotated gene model is described near the bottom.
+    The GFF file is highly decorated with information that could assist manual
     curation of the gene model (see Figure 3 in the manuscript).
     
-    The re-annotated gene model's gclass is 'AbfgpGeneStructure'
-    Exons and introns fmethods are named 'AbfgpExon', 'AbfgpIntron'
-    The fscore as provided in the AbfgpExon and AbfgpIntron tracks
-    is the `ok` (1) or `doubtful` (0) label that is assigned by the introspection module
-    as described in the manuscript.
+    The re-annotated gene model's gclass is 'AbfgpGeneStructure'.
+    Exons and introns fmethods are named 'AbfgpExon', 'AbfgpIntron'.
+    The fscore in the AbfgpExon and AbfgpIntron tracks is the `ok` (1) or `doubtful` (0) label
+    assigned by the introspection module as described in the manuscript.
     
     To visualize the output, configure the Generic Genome Browser (http://gmod.org/wiki/GBrowse)
-    of any other framework that can visualize GFF. In case you choose for the 
-    Generic Genome Browser, our config file is provided in settings/GenericGenomeBrowser.abfgp.conf
+    of any other framework that can visualize GFF. In case you choose the Generic Genome Browser,
+    our config file is provided in settings/GenericGenomeBrowser.abfgp.conf
     Track names in this file correspond to those named in setting/gff
     
     Various other orthologous groups are provided in testdata/.
@@ -1014,7 +1016,7 @@ useful informants too.
       You could use slopBed: we are a great fan of the BEDTools suite!
       http://bedtools.readthedocs.org/en/latest/
       http://bedtools.readthedocs.org/en/latest/content/tools/slop.html      
-      Quinlan AR and Hall IM, 2010. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 26, 6, pp. 841–842.
+      Quinlan AR and Hall IM, 2010. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 26, 6, pp. 841ï¿½842.
     - blast your target protein of interest to downloaded databases with unigenes (TBLASTN)
     - the NCBI's UniGene database could be an interesting and rich resource for plenty of unigenes:
       http://www.ncbi.nlm.nih.gov/unigene
@@ -1134,7 +1136,7 @@ useful informants too.
     - link the loci at which unigenes are aligned to loci at which genes are annotated.
       There are a dozen way to do this. We are a great fan of the BEDTools suite:
       http://bedtools.readthedocs.org/en/latest/
-      Quinlan AR and Hall IM, 2010. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 26, 6, pp. 841–842.
+      Quinlan AR and Hall IM, 2010. BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics. 26, 6, pp. 841ï¿½842.
       Use the executable clusterBed; cat <FILE_WITH_GENE_ANNOTATION.GFF> <FILE_WITH_ALIGNED_UNIGENES.GFF | clusterBed -i stdin
     - depending on the choice you organized your data, handle the unigene that is linked
       that linked to your target or informant gene locus:
@@ -1337,9 +1339,9 @@ CRYPA_341138    CRYPA_341138    18      1479    1683    193.1   2       204     
 ABFGP           Alignment Based Fungal Gene Prediction
 
 ABGP            Alignment Based Gene Prediction;
-                Subtle modified versions of AB(F)GP were successfully tested by the
-                developer on non-fungal systems too. Modules in the code that generic
-                for alignment-based gene prediction, and are not tailored to fungi,
+                Subtly modified versions of AB(F)GP were successfully tested by the
+                developer on non-fungal systems too. Modules in the code that are generic
+                for alignment-based gene prediction, and not tailored to fungi,
                 are named accordingly.
             
 AbgpGeneLocus   AbgpGeneLocusDirectory (just a shortening)
