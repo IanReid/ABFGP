@@ -1,3 +1,4 @@
+#!/bin/sh
 # read single !line! of gff and output feature length
 read -a gff;
 fstart=${gff[3]}
