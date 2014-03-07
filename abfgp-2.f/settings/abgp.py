@@ -1,19 +1,19 @@
 """
 Alignment Based Gene Predictions settings: all paths and settings required
-for succesful execution of the ABGP suite of algorithms
+for successful execution of the ABGP suite of algorithms
 """
-
+import sys,os
 from os.path import join as osPathJoin
-
+this_dir = os.path.dirname(__file__)
 ################################################################################
 # Main ABGP directory
 ################################################################################
-MAIN_ABGP_PATH         = "/home/ian/python/ABFGP/abfgp-2.f/"               # ADJUST TO YOUR PERSONAL SYSTEM
-ABGP_OUTDIR_PATH       = "/home/ian/tmp/abfgp/results"                                     # ADJUST TO YOUR PERSONAL SYSTEM; e.g. /tmp/abfgp/results
+MAIN_ABGP_PATH         = os.path.dirname(this_dir)               # ADJUST TO YOUR PERSONAL SYSTEM
+ABGP_OUTDIR_PATH       = "/home/ian/tmp/abfgp/results"           # ADJUST TO YOUR PERSONAL SYSTEM; e.g. /tmp/abfgp/results
 
 # decorative variable used e.g. in GFF fsource
 ABGP_PROGRAM_NAME      = "abfgp"
-ABGP_VERSION_NUMBER    = "2.0"
+ABGP_VERSION_NUMBER    = "2.f"
 ABGP_VERSION           = ABGP_PROGRAM_NAME + ABGP_VERSION_NUMBER
 
 MAIN_ABFGP_PATH        = MAIN_ABGP_PATH     # alias -> to be DEPRECATED

@@ -478,7 +478,7 @@ if OPTIONS.output_storelocitoggbdb and OPTIONS.target:
 
 
 ################################################################################
-# proces getorf data
+# process getorf data
 ################################################################################
 input = rungetorf(input)
 for key in input.keys():
@@ -487,7 +487,7 @@ logf("#", stw.lap(),"getorf processed")
 
 
 ################################################################################
-# proces input gff data in the AbgpGeneLocusDirectories (when applied)
+# process input gff data in the AbgpGeneLocusDirectories (when applied)
 ################################################################################
 input = parseinputgff(input)
 logf("#", stw.lap(),"input gff processed")
@@ -669,7 +669,7 @@ for org in ORGANISMS:
 logf("#", stw.lap(),"Unigenes added as informants:", unigene_informants_added)
 
 ################################################################################
-# proces tcode data
+# process tcode data
 ################################################################################
 input = obtaintcodedata(input)
 logf("#", stw.lap(),"tcode processed")
@@ -748,7 +748,7 @@ if VERBOSE:
 
 
 ################################################################################
-# some printing in none-VERBOSE mode
+# some printing in non-VERBOSE mode
 ################################################################################
 logf("# annotated genestructure model")
 for org in ORGANISMS:
