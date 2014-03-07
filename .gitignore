@@ -1,0 +1,8 @@
+abfgp-2.f/settings/executables.py
+*.pyc
+abfgp-2.f/software/*
+.idea/
+abfgp-2.f/gene/settings
+abfgp-2.f/parsers/executables.py
+*~
+
