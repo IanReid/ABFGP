@@ -354,7 +354,7 @@ class IntermediateCodingBlockGraphFunctions:
             acceptor = next._CBGinterface5p._optimal_aligned_acceptor.get_organism_objects(organism)[0]
 
             # get list of possible intermediate ORFs
-            orflist  = self.input[organism]['orfs'].get_elegiable_orfs(
+            orflist  = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start=acceptor.pos,
                     min_orf_end=donor.pos, 
                     )
@@ -813,7 +813,7 @@ class IntermediateCodingBlockGraphFunctions:
             accepOrf = next.get_orfs_of_graph(organism=organism)[0]
 
             # get list of possible intermediate ORFs
-            orflist  = self.input[organism]['orfs'].get_elegiable_orfs(
+            orflist  = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start=min(nextOmsr[nextNode])*3,
                     min_orf_end=max(prevOmsr[prevNode])*3,
                     )

@@ -3,14 +3,14 @@ __author__ = 'ian'
 import sys, os
 
 this_dir = os.path.dirname(__file__)
-# src = os.path.dirname(this_dir)
-# sys.path.append(src)
-sys.path.append('/home/ian/python/')
 import argparse
 from Bio import SeqIO
-from transcriptomics.src.GeneModels.gff3Iterator import GFF3Iterator
+import re
+from itertools import groupby
 
-DESCRIPTION = 'Create a set of ABFGP GeneLocusDirectories for the protein coding genes annotated in a GFF3 file'
+name_pat = re.compile('name "([^"]+)";')
+
+DESCRIPTION = 'Create a set of ABFGP GeneLocusDirectories for the protein coding genes annotated in a GFF2 file'
 VERSION = '0.1'
 FLANK_LENGTH = 1000
 
@@ -28,6 +28,12 @@ def get_args():
     argparser.add_argument('--tag','-t',dest='organism_tag',required=True,help='Unique identifier for this genome')
     return argparser.parse_args()
 
+def get_name(line):
+    name = None
+    match = name_pat.search(line)
+    if match:
+        name = match.group(1)
+    return name
 
 if __name__ == '__main__':
     args = get_args()
@@ -37,22 +43,29 @@ if __name__ == '__main__':
 
     genome = SeqIO.to_dict(SeqIO.parse(open(args.genome),'fasta'))
 
-    for gene in GFF3Iterator(args.input).genes():
-        for transcript in gene.get_transcripts():
-            genelocusid = transcript.get_ID()
+    for genelocusid,gene_lines_iter in groupby(args.input.xreadlines(),key=get_name):
+        if genelocusid:
             genelocusdir = os.path.join(outdir,genelocusid)
             if not os.path.isdir(genelocusdir):
                 os.makedirs(genelocusdir)
+            gff_tuples = [line.strip().split('\t') for line in gene_lines_iter]
+            chrom_id = gff_tuples[0][0]
+            gene_start = int(gff_tuples[0][3])
+            gene_end = int(gff_tuples[0][4])
+            for gff_tuple in gff_tuples[1:]:
+                gene_start = min(gene_start, int(gff_tuple[3]))
+                gene_end = max(gene_end,int(gff_tuple[4]) )
+            strand = gff_tuples[0][6]
 
             # Make dna.fa file
-            chrom = genome[transcript.get_seqID()]
-            start = max(1, transcript.get_start() - FLANK_LENGTH)
-            end = min(len(chrom)-1,transcript.get_end() + FLANK_LENGTH)
+            chrom = genome[chrom_id]
+            start = max(1, gene_start - FLANK_LENGTH)
+            end = min(len(chrom)-1,gene_end + FLANK_LENGTH)
             sequence = chrom[start-1:end]
             seq_id = '%s.%s' % (args.organism_tag, genelocusid)
             sequence.id = seq_id
             sequence.description = 'Padded genome sequence'
-            if transcript.get_strand() == '-':
+            if strand == '-':
                 sequence.seq = sequence.seq.reverse_complement()
                 sequence.description += ' reverse-complemented'
             with open(os.path.join(genelocusdir,'%s.dna.fa' % genelocusid),'w') as seqout:
@@ -61,29 +74,13 @@ if __name__ == '__main__':
             # Make locus.gff file
             with open(os.path.join(genelocusdir,'%s.locus.gff' % genelocusid),'w') as locusout:
                 locus_str = '%s\tabgp_locus\tabgp_locus\t%s\t%s\t.\t%s\t.\tgene_id "%s"; abgp_locus "%s"' % \
-                            (transcript.get_seqID(),start, end, transcript.get_strand(),seq_id,seq_id)
+                            (chrom_id,start, end, strand,seq_id,seq_id)
                 locusout.write(locus_str)
 
             # Make gene.gff file
             with open(os.path.join(genelocusdir,'%s.gene.gff' % genelocusid),'w') as geneout:
-                attributes = '\tgene_id "%s"; name "%s"; transcriptId "%s"' %(seq_id,seq_id,seq_id)
-                start_codon = str(transcript.make_start_codon()).rsplit('\t',1)[0] + attributes
-                stop_codon = str(transcript.make_stop_codon()).rsplit('\t',1)[0] + attributes
-                if transcript.get_strand() == '-':
-                    print >> geneout, stop_codon
-                else:
-                    print >> geneout,start_codon
-                for exon in sorted(transcript.get_exons()):
-                    exon_str = str(exon).rsplit('\t',1)[0] + attributes
-                    print >> geneout, exon_str
-                if transcript.get_strand() == '-':
-                    print >> geneout, start_codon
-                else:
-                    print >> geneout,stop_codon
-
-
-
-
-
+                for gff_tuple in gff_tuples:
+                    gff_tuple[8] = 'gene_id "%s"; %s' % (genelocusid, gff_tuple[8])
+                    print >> geneout, '\t'.join(gff_tuple)
 
     print >> sys.stderr, sys.argv[0], 'done.'

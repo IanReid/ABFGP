@@ -237,7 +237,7 @@ class FinalCodingBlockGraphFunctions:
                 continue
 
             # get elegiable (new) final orfs
-            orflist = self.input[organism]['orfs'].get_elegiable_orfs(
+            orflist = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start=offset+max_intron_nt_length,
                     min_orf_end=offset )
             ################################################################

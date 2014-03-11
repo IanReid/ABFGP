@@ -1159,8 +1159,8 @@ def get_informant_supported_seqerrors(se,gapDataObj,clustalwdata,inwpcbgs,PCG,OP
             orf_aa_seq = aligned[OPTIONS.target][clw_sta:clw_end].replace('-','')
             orf_nt_sta = orf_sta*3 + concerned_orfs[0].frame
             orf_nt_end = orf_end*3 + concerned_orfs[0].frame
-            orfs = input[OPTIONS.target]['orfs'].get_elegiable_orfs(
-                # get_elegiable_orfs() filtering is in nt coords/length!
+            orfs = input[OPTIONS.target]['orfs'].get_eligible_orfs(
+                # get_eligible_orfs() filtering is in nt coords/length!
                 min_orf_length = len(orf_aa_seq)*3,
                 max_orf_length = len(orf_aa_seq)*3,
                 max_orf_start = orf_nt_sta, min_orf_start = orf_nt_sta,

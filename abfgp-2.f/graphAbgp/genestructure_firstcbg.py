@@ -205,7 +205,7 @@ class FirstCodingBlockGraphFunctions:
             offset = min(omsr[node]) * 3 + elegiable_acceptor_omsr_nt_offset
 
             # get elegiable orfs based on offset and intron length
-            orflist = self.input[organism]['orfs'].get_elegiable_orfs(
+            orflist = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start=offset,
                     min_orf_end=offset-max_intron_nt_length,
                     has_starts=True )
@@ -1042,7 +1042,7 @@ class FirstCodingBlockGraphFunctions:
             ####################################################################
 
             # get elegiable orfs based on acceptor and intron length
-            orflist = self.input[organism]['orfs'].get_elegiable_orfs(
+            orflist = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start= acceptor.pos,
                     min_orf_end= acceptor.pos - max_intron_nt_length,
                     has_starts=True )
@@ -1529,7 +1529,7 @@ class FirstCodingBlockGraphFunctions:
             ####################################################################
 
             # get elegiable orfs based on acceptor and intron length
-            orflist = self.input[organism]['orfs'].get_elegiable_orfs(
+            orflist = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start= acceptor.pos,
                     min_orf_end= acceptor.pos - max_intron_nt_length )
 

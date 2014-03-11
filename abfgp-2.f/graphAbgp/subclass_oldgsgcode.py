@@ -211,7 +211,7 @@ class DeprecatedGSGFunctions:
                     if acc.pos > tmp_accep.pos: tmp_accep = acc
                 for don in preceding_donor_sites:
                     if don.pos < tmp_donor.pos: tmp_donor = don
-                orflist  = self.input[organism]['orfs'].get_elegiable_orfs(
+                orflist  = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start=tmp_accep.pos,
                     min_orf_end=tmp_donor.pos,
                     )
@@ -220,7 +220,7 @@ class DeprecatedGSGFunctions:
                 print tmp_accep
 
             else:
-                orflist  = self.input[organism]['orfs'].get_elegiable_orfs(
+                orflist  = self.input[organism]['orfs'].get_eligible_orfs(
                     max_orf_start=acceptor.pos,
                     min_orf_end=donor.pos,
                     )

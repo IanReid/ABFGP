@@ -99,10 +99,11 @@ def parsegfffile(gfffile,offset=0):
     """ 
     tracks = []
     for line in open(gfffile).readlines():
-        gff = line.strip().split("\t")
-        gff[3] = int(gff[3])-offset
-        gff[4] = int(gff[4])-offset
-        tracks.append( tuple(gff) )
+        if line.strip():
+            gff = line.strip().split("\t")
+            gff[3] = int(gff[3])-offset
+            gff[4] = int(gff[4])-offset
+            tracks.append( tuple(gff) )
     # return gff tracks list
     return tracks 
 

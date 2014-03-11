@@ -74,24 +74,24 @@ def createblastdbs(input,GSG,OPTIONS,dbfraction=None,organism=None,acceptorfids=
             if dbfraction == 'GSGupstream':
                 # take only orfs LEFT of the first CBG in GSG
                 max_orf_nt_start = max(GSG[0].overall_minimal_spanning_range(organism=org)) * 3
-                orflist = input[org]['orfs'].get_elegiable_orfs(max_orf_start=max_orf_nt_start,
+                orflist = input[org]['orfs'].get_eligible_orfs(max_orf_start=max_orf_nt_start,
                         acceptorfids=acceptorfids,rejectorfids=rejectorfids)
             elif dbfraction == 'GSGdownstream':
                 # take only orfs RIGTH of the last CBG in GSG
                 min_orf_nt_end = min(GSG[-1].overall_minimal_spanning_range(organism=org)) * 3
-                orflist = input[org]['orfs'].get_elegiable_orfs(min_orf_end=min_orf_nt_end,
+                orflist = input[org]['orfs'].get_eligible_orfs(min_orf_end=min_orf_nt_end,
                         acceptorfids=acceptorfids,rejectorfids=rejectorfids)
             elif dbfraction == 'GSGcentral':
                 # take only orfs in between FIRST and LAST CBG in GSG (can be only one CBG!)
                 max_orf_nt_start = max(GSG[-1].overall_minimal_spanning_range(organism=org)) * 3
                 min_orf_nt_end   = min(GSG[0].overall_minimal_spanning_range(organism=org)) * 3
-                orflist = input[org]['orfs'].get_elegiable_orfs(min_orf_end=min_orf_nt_end,
+                orflist = input[org]['orfs'].get_eligible_orfs(min_orf_end=min_orf_nt_end,
                         max_orf_start=max_orf_nt_start,
                         acceptorfids=acceptorfids,rejectorfids=rejectorfids)
             else:
                 # dbfraction equals 'all' or None -> no limitation, just take all orfs!
                 # do only the general limitation on sublists of orfids
-                orflist = input[org]['orfs'].get_elegiable_orfs(
+                orflist = input[org]['orfs'].get_eligible_orfs(
                         acceptorfids=acceptorfids,rejectorfids=rejectorfids)
 
             # create masked fasta of this sequence part only
@@ -377,25 +377,25 @@ def iterativecrossblastp(input,crossdata,OPTIONS,GTgraph=None,CBgraph=None,GSgra
             if dbfraction == 'GSGupstream':
                 # take only orfs LEFT of the first CBG in GSG
                 max_orf_nt_start = max(GSgraph[0].overall_minimal_spanning_range(organism=geneQ)) * 3
-                orfQlist = input[geneQ]['orfs'].get_elegiable_orfs(
+                orfQlist = input[geneQ]['orfs'].get_eligible_orfs(
                         acceptorfids=encounteredQorfids,max_orf_start=max_orf_nt_start)
             elif dbfraction == 'GSGdownstream':
                 # take only orfs RIGTH of the last CBG in GSG
                 min_orf_nt_end = min(GSgraph[-1].overall_minimal_spanning_range(organism=geneQ)) * 3
-                orfQlist = input[geneQ]['orfs'].get_elegiable_orfs(
+                orfQlist = input[geneQ]['orfs'].get_eligible_orfs(
                         acceptorfids=encounteredQorfids,min_orf_end=min_orf_nt_end)
             elif dbfraction == 'GSGcentral':
                 # take only orfs in between FIRST and LAST CBG in GSG (can be only one CBG!)
                 max_orf_nt_start = max(GSgraph[-1].overall_minimal_spanning_range(organism=geneQ)) * 3
                 min_orf_nt_end   = min(GSgraph[0].overall_minimal_spanning_range(organism=geneQ)) * 3
-                orfQlist = input[geneQ]['orfs'].get_elegiable_orfs(
+                orfQlist = input[geneQ]['orfs'].get_eligible_orfs(
                         acceptorfids=encounteredQorfids,min_orf_end=min_orf_nt_end,
                         max_orf_start=max_orf_nt_start)
             else:
                 # dbfraction equals 'all' or None -> no limitation, just take all orfs!
                 # only to the general limimation on previously encountered orf nodes
                 # this is in fact an exception -> wrong use of parameters!
-                orfQlist = input[geneQ]['orfs'].get_elegiable_orfs(acceptorfids=encounteredQorfids)
+                orfQlist = input[geneQ]['orfs'].get_eligible_orfs(acceptorfids=encounteredQorfids)
 
         elif dbfraction == 'annotation':
             # take only the subset of orfs in the current gene's annotation
@@ -415,12 +415,12 @@ def iterativecrossblastp(input,crossdata,OPTIONS,GTgraph=None,CBgraph=None,GSgra
             for (bits,length,orfQid,orfSid) in crossdata[(geneQ,geneS)]['accepted_pacbs'].keys():
                 if orfQid in acceptorfids:
                     acceptorfids.remove(orfQid)
-            orfQlist = input[geneQ]['orfs'].get_elegiable_orfs(acceptorfids=list(acceptorfids))
+            orfQlist = input[geneQ]['orfs'].get_eligible_orfs(acceptorfids=list(acceptorfids))
 
         elif dbfraction == 'HCP':
             # Take High Coding Potential Orfs:
             # take *not* TCODE non-coding and at least of a certain length
-            orfQlist = input[geneQ]['orfs'].get_elegiable_orfs(
+            orfQlist = input[geneQ]['orfs'].get_eligible_orfs(
                     tcode_is_noncoding = False,
                     min_orf_length=250,
                     rejectorfids=input[geneQ]['orfid-genestructure'] )

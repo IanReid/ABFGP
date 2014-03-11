@@ -209,11 +209,11 @@ def _get_elegiable_frameshift_orfsets(cbg,input,extra_nt_offset=3):
         org = cbg.organism_by_node(node)
         retdict[org] = GetorfOrfSet()
         thisorf = orfs[org][0]
-        #orfsubset = input[org]['orfs'].get_elegiable_orfs(
+        #orfsubset = input[org]['orfs'].get_eligible_orfs(
         #        max_orf_start = min(omsr)*3+thisorf.frame+extra_nt_offset,
         #        min_orf_end= (max(omsr)+1)*3+thisorf.frame-extra_nt_offset
         #        )
-        orfsubset = input[org]['orfs'].get_elegiable_orfs(
+        orfsubset = input[org]['orfs'].get_eligible_orfs(
                 max_orf_start = (max(omsr)+1)*3,
                 min_orf_end= min(omsr)*3
                 )

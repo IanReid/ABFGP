@@ -375,12 +375,12 @@ def _create_hmm_db(organism,inputdict,cbg,prev,next,
 
     # (2a) get elegiable sets of orfs from prev and next
     if not orf_must_have_start:
-        elegiable_orfs = inputdict[organism]['orfs'].get_elegiable_orfs(
+        elegiable_orfs = inputdict[organism]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin, max_orf_start = nextMax
                 )
     else:
         # ORFs *must* have starts => searching for a TSS exon/CBG
-        elegiable_orfs = inputdict[organism]['orfs'].get_elegiable_orfs(
+        elegiable_orfs = inputdict[organism]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin, max_orf_start = nextMax,
                 has_starts=True
                 )

@@ -23,7 +23,7 @@ from executables import (
 
 def parseGetorfOutput(content):
     """
-    Parse getorf output file(handle), returns dictionaty with orfs
+    Parse getorf output file(handle), returns dictionary with orfs
 
     @type  content: open filehandle
     @param content: filehandle of a EMBOSS getorf output fasta file
@@ -36,12 +36,12 @@ def parseGetorfOutput(content):
     """
     orfs = {}
     for header, sequence in parseFasta(content).iteritems():
-	# below 3 lines retrieves start coordinates from getorf output
+    # below 3 lines retrieves start coordinates from getorf output
 	(fref,whatever)= header.split("_",1)
-	(start,stop)  = header.split(" ",1)[-1][1:-1].split(" - ")
-	(start,stop)  = (int(start),int(stop))
-	name = (fref,start,stop)
-	orfs[name] = sequence
+    (start,stop)  = header.split(" ",1)[-1][1:-1].split(" - ")
+    (start,stop)  = (int(start),int(stop))
+    name = (fref,start,stop)
+    orfs[name] = sequence
     # return fasta dictionary with openreadingframe info
     return orfs
 
@@ -61,7 +61,7 @@ def __parseGetorfOutput(content):
     @attention: content can be: sys.stdin.readlines()
     @attention: content can be: fh.readlines()
     """
-    seqs = {}; name = ''; seq = '';
+    seqs = {}; name = ''; seq = ''
     for line in content:
         line = line.strip()
         if not line: continue
@@ -143,13 +143,13 @@ def getorf(sequence=None,fname=None,outputfile=None,
     """
     # do some integrity checks
     if not sequence and not fname:
-	message = "specify `sequence` or `fname` variable, not neither"
+        message = "specify `sequence` or `fname` variable, not neither"
         raise InproperlyAppliedArgument, message
     if sequence and fname:
-	message = "specify `sequence` or `fname` variable, not both"
+        message = "specify `sequence` or `fname` variable, not both"
         raise InproperlyAppliedArgument, message
     if not executable_getorf:
-	message = "specify `EXECUTABLE_GETORF` variable"
+        message = "specify `EXECUTABLE_GETORF` variable"
         raise InproperlyAppliedArgument, message
 
     # create command line, execute with popen and parse

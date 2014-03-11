@@ -565,7 +565,7 @@ def _merge_pacbporfs_by_tinyexon_and_two_introns(pacbporfD,pacbporfA,
                 ####################################
                 tinyexonorf = None
                 # select the Orf on which the tinyexon is located
-                for orfObj in orfSetObject.get_elegiable_orfs(
+                for orfObj in orfSetObject.get_eligible_orfs(
                 max_orf_start=exonQstart,min_orf_end=exonQstop):
                     orfPhase = (exonQstart - orfObj.startPY) % 3
                     if orfPhase == dPhase:               

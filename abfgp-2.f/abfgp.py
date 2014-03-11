@@ -55,8 +55,8 @@ from graphAbgp import (
     GeneTreeGraph,
     GenestructureOfCodingBlockGraphs,
     InwardsPointingCodingBlockGraph,
-    OrganismNotPresentInGraph,
     )
+from abgp_exceptions import OrganismNotPresentInGraph
 from graphAbgp.graph_pacbpcollection import _delete_pacbp
 
 # Pythonlibs imports
@@ -891,7 +891,7 @@ else:
     min_orf_end   = None
     max_orf_start = None
 # generate a list of accepted OrfIds to make a blastdb from
-accepted_orfs_ids = [ orf.id for orf in input[OPTIONS.target]['orfs'].get_elegiable_orfs(
+accepted_orfs_ids = [ orf.id for orf in input[OPTIONS.target]['orfs'].get_eligible_orfs(
     min_orf_end   = min_orf_end, max_orf_start = max_orf_start,
     rejectorfids = input[OPTIONS.target]['orfid-genestructure'],
     ) ]
@@ -4550,7 +4550,7 @@ if OPTIONS.abinitio == False:
                 max_exon_nt_length = max([ te.length for te in informant_exon_objects ] ) + 3
                 max_orf_start = min(inwpcbgs[0].minimal_spanning_range(organism=OPTIONS.target))*3
                 min_orf_end   = max_orf_start - 150
-                for orfX in input[org]['orfs'].get_elegiable_orfs(max_orf_start=max_orf_start,min_orf_end=min_orf_end):
+                for orfX in input[org]['orfs'].get_eligible_orfs(max_orf_start=max_orf_start,min_orf_end=min_orf_end):
                     # predict potential tinyexons
                     firstexons.extend( get_potention_first_exons_on_orf(orfX,
                         max_tinyexon_nt_length      = max_exon_nt_length,

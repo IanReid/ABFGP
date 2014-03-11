@@ -225,7 +225,7 @@ def genestructuregff2orfs(gfftracks,orfset,typeofunigene='n.a.',verbose=False):
         start, end = int(gfftrack[3])-1, int(gfftrack[4])
         # find the orf to which this thing belongs
         seen = False
-        orfsubset = orfset.get_elegiable_orfs(max_orf_start=start+2,min_orf_end=end-3)
+        orfsubset = orfset.get_eligible_orfs(max_orf_start=start+2,min_orf_end=end-3)
 
         for orf in orfsubset:
             # end offset+4 is needed for exon on the final frontier
@@ -316,11 +316,11 @@ def potentialsequenceerror(gfftracks,orfset,verbose=False):
     for gfftrack in gfftracks:
         start, end = int(gfftrack[3])-1, int(gfftrack[4])
 
-        if orfset.get_elegiable_orfs(max_orf_start=start+2,min_orf_end=end-3):
+        if orfset.get_eligible_orfs(max_orf_start=start+2,min_orf_end=end-3):
             continue
 
         # get list of orfs that can build up this missing orf
-        orfsublist = orfset.get_elegiable_orfs(max_orf_start=end,min_orf_end=start)
+        orfsublist = orfset.get_eligible_orfs(max_orf_start=end,min_orf_end=start)
 
         # print orf assembly message
         assembleorf(orfsublist,start,end)
@@ -579,6 +579,7 @@ def parseinputgff(input):
 def confirmcanonicalsplicesites(sequence,gfflist,exon_fmethod=None,verbose=False):
     """
     """
+    # sequence has original orientation, but exon coords may have been transferred to other strand
     onlycanonical = True
     warnings = []
     exons = filtergffs4fmethod(gfflist,exon_fmethod)
@@ -810,7 +811,7 @@ def geneconfirmation(input,verbose=False):
                                          EXECUTABLE_GFF2FASTA,
                                          input[org]['genomeseqfile'] )
                 ci,co,ce = os.popen3(command)
-                # make shure geneexontracks FREF matches input[org]['genomeseqfile'] FREF
+                # make sure geneexontracks FREF matches input[org]['genomeseqfile'] FREF
                 loci_dna_fref = open(input[org]['genomeseqfile']).readlines()[0].split(' ')[0].replace(">","") 
                 ci.write( gffs2txt(geneexontracks).replace( geneexontracks[0][0],loci_dna_fref ) )
                 ci.close()

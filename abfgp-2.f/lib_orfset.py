@@ -9,7 +9,7 @@ __license__ = "MIT"
 # Python Imports
 from sets import Set
 
-# Miscelaneous Imports
+# Miscellaneous Imports
 from lib_fasta import parseFasta
 from parsers.getorf import getorf
 
@@ -31,12 +31,12 @@ class OrfSet:
 	Initialize OrfSet object
 	
         @type  sequence: string
-        @param sequence: DNA sequence string that served as input fot getorf
+        @param sequence: DNA sequence string that served as input for getorf
 
         @type  start: integer
         @param start: zero-positive integer, nt offset of DNA sequence slice
         """
-        # sequence    genomic sequence that is fedded to getorf
+        # sequence    genomic sequence that is fed to getorf
         # accession   accession of this sequence
         # start       start coordinate (offset) of the sequence slice
         # stop        stop coordinate of the sequence slice (GFF coordinate)
@@ -50,18 +50,18 @@ class OrfSet:
         self.orfs       = []
         self.sequence   = sequence
 
-	# metadata attributes of OrfSet
+    # metadata attributes of OrfSet
         self.version    = None
         self.accession  = None
 
-	# absolute coordinates relating to self.sequence
+    # absolute coordinates relating to self.sequence
         self.strand     = None      # TODO: in use? not in __init__ or parse !?
         self.start      = start
         self.stop       = None      # TODO: in use? not in __init__ or parse !?
-	self.end	= self.stop # TODO: in use? not in __init__ or parse !?
+        self.end	= self.stop # TODO: in use? not in __init__ or parse !?
         self.startPY    = None      # TODO: in use? not in __init__ or parse !?
         self.stopPY     = None      # TODO: in use? not in __init__ or parse !?
-	self.endPY	= self.stopPY
+        self.endPY	= self.stopPY
 
     # end of function __init__
 
@@ -150,27 +150,27 @@ class OrfSet:
     # end of function tomaskedfasta
 
 
-    def get_elegiable_orfs(self,**kwargs):
+    def get_eligible_orfs(self,**kwargs):
         """
-        Return a selection of elegiable orfs based on several parameters
+        Return a selection of eligible orfs based on several parameters
 
-        @attention: for function arguments, see get_elegiable_orfs() function
+        @attention: for function arguments, see get_eligible_orfs() function
 
         @rtype:  list
-        @return: list of elegiable Orfs
+        @return: list of eligible Orfs
         """
-        return get_elegiable_orfs(self.orfs,**kwargs)
+        return get_eligible_orfs(self.orfs,**kwargs)
 
-    # end of function get_elegiable_orfs
+    # end of function get_eligible_orfs
 
 
     def filter(self,**kwargs):
         """
         Filter the Orf objects in this OrfSet (and remove failed Orf objects)
 	
-        @attention: for function arguments, see get_elegiable_orfs() function
+        @attention: for function arguments, see get_eligible_orfs() function
         """
-        self.orfs = get_elegiable_orfs(self.orfs,**kwargs)
+        self.orfs = get_eligible_orfs(self.orfs,**kwargs)
 
     # end of function filter
 
@@ -182,7 +182,7 @@ class GetorfOrfSet(OrfSet):
     """
     def __init__(self,sequence="",start=None,version=EXECUTABLE_GETORF_VERSION):
         """
-	Initialize GetorfOrfSet object from EMBOSS getorf result
+        Initialize GetorfOrfSet object from EMBOSS getorf result
 	
         @type  sequence: string
         @param sequence: DNA sequence string that served as input fot getorf
@@ -194,7 +194,7 @@ class GetorfOrfSet(OrfSet):
         @param version: EMBOSS Getorf version
 
         """
-	OrfSet.__init__(self,sequence=sequence,start=start)
+        OrfSet.__init__(self,sequence=sequence,start=start)
         self.version = version
 
     # end of function __init__
@@ -232,7 +232,7 @@ class GetorfOrfSet(OrfSet):
 
         if (start or start == 0) and type(start) == type(int()):
             self.start = start
-	    self.end   = self.start+len(self.sequence)
+        self.end   = self.start+len(self.sequence)
 
         # parse the ouput file
         self._parsefilehandle(filehandle)
@@ -255,7 +255,7 @@ class GetorfOrfSet(OrfSet):
 
         # parse the ouput file
         seqs = parseFasta( getorf( sequence=self.sequence ).split("\n") )
-	self._dict_to_orfs( seqs )
+        self._dict_to_orfs( seqs )
 	
     # end of function getorfs
 
@@ -273,20 +273,19 @@ class GetorfOrfSet(OrfSet):
 
 
     def _dict_to_orfs(self,sequencedict,sequence=None):
-	"""
-	Convert a fasta sequence dictionary to Orf objects
+        """ Convert a fasta sequence dictionary to Orf objects
 
-        @type  sequencedict: dict
-        @param sequencedict: fasta dictionary (values=sequence strings)
+            @type  sequencedict: dict
+            @param sequencedict: fasta dictionary (values=sequence strings)
 
-        @type  sequence: string (or None)
-        @param sequence: sequence string on which Orfs are located
-	"""
-	if sequence: self.sequence = sequence
+            @type  sequence: string (or None)
+            @param sequence: sequence string on which Orfs are located
+        """
+        if sequence: self.sequence = sequence
         for h,s in sequencedict.iteritems():
             force_id = len(self.orfs)
             self.orfs.append( TcodeCodingOrf(h,s,
-		inputgenomicsequence=self.sequence, force_id=force_id) )
+        inputgenomicsequence=self.sequence, force_id=force_id) )
 
     # end of function _dict_to_orfs
 
@@ -327,14 +326,14 @@ class GetorfOrfSet(OrfSet):
 # end of class GetorfOrfSet
 
 
-def get_elegiable_orfs(orflist,min_orf_length=None,max_orf_length=None,
+def get_eligible_orfs(orflist,min_orf_length=None,max_orf_length=None,
     min_orf_start=None,min_orf_end=None,max_orf_start=None,max_orf_end=None,
     acceptorfids=[],rejectorfids=[],has_starts=None,
     tcode_symbolic_in=[],tcode_is_coding=None,tcode_is_noncoding=None,
     is_internalexon=None,is_firstexon=None,
     is_finalexon=None,is_singleexon=None):
     """
-    Return a selection of elegiable orfs based on several parameters
+    Return a selection of eligible orfs based on several parameters
 
     @type  min_orf_length: positive integer (or None)
     @param min_orf_length: minimal nt length of Orf
@@ -421,7 +420,7 @@ def get_elegiable_orfs(orflist,min_orf_length=None,max_orf_length=None,
             if not orf.has_start():             continue
         else:                                   pass
 
-	if orf.__class__.__name__ in ['CodingOrf','TcodeCodingOrf']:
+        if orf.__class__.__name__ in ['CodingOrf','TcodeCodingOrf']:
 
             # check for potential internal exon
             if is_internalexon == None:                 pass
@@ -460,7 +459,7 @@ def get_elegiable_orfs(orflist,min_orf_length=None,max_orf_length=None,
             pass
 
 
-	if orf.__class__.__name__ in ['TcodeOrf','TcodeCodingOrf']:
+        if orf.__class__.__name__ in ['TcodeOrf','TcodeCodingOrf']:
             if tcode_is_coding == False:
                 if orf.tcode_is_coding():
                     continue
@@ -484,12 +483,12 @@ def get_elegiable_orfs(orflist,min_orf_length=None,max_orf_length=None,
             pass
 
         # if this point is reached without hitting a `continue`
-        # statement, this Orf is eligiable!
+        # statement, this Orf is eligible!
         retlist.append( orf )
 
     # return the subselection of orfs
     return retlist
 
-# end of function get_elegiable_orfs
+# end of function get_eligible_orfs
 
 

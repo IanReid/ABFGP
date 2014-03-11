@@ -167,7 +167,7 @@ class AbgpGeneLocusDirectory:
 
         # check if locus gff file specifies the same length as the dna file is
         if fastafilesequencelength(self.dna_file) != gfffilesequencelength(self.locus_file):
-            message = "dnafile '%s' (l=%s) and locusfile '%s' (l='%s') specify unidentical sequence lengths" % (
+            message = "dnafile '%s' (l=%s) and locusfile '%s' (l='%s') specify different sequence lengths" % (
                     self.dna_file, fastafilesequencelength(self.dna_file),
                     self.locus_file, gfffilesequencelength(self.locus_file)
                     )

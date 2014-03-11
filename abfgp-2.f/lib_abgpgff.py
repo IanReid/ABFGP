@@ -2289,11 +2289,13 @@ def create_intron_mapping_gff_file(input,PCG,introndata,assessed_interfaces,OPTI
         errors.sort()
         errors = [ error for (start,error) in errors ]
         index = 0
-        errors[0]._gff['gname'] = errors[0]._gff['gname']+"-%s" % index
+        if errors[0]._gff['gname']:
+            errors[0]._gff['gname'] = errors[0]._gff['gname']+"-%s" % index
         for pos in range(1,len(errors)):
             if errors[pos].start != errors[pos-1].end:
                 index += 1
-            errors[pos]._gff['gname'] = errors[pos]._gff['gname']+"-%s" % index
+            if errors[pos]._gff['gname']:
+                errors[pos]._gff['gname'] = errors[pos]._gff['gname']+"-%s" % index
 
     # append errors to gffs
     for error in errors: gffs.append( error.togff() )

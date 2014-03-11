@@ -103,13 +103,13 @@ def _get_cbg_hmmsearch_results(cbg, inputdict, org, prev, next,
 
     # get elegiable sets of orfs from prev and next
     if not orf_must_have_start:
-        elegiable_orfs = inputdict[org]['orfs'].get_elegiable_orfs(
+        elegiable_orfs = inputdict[org]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin,
                 max_orf_start = nextMax
                 )
     else:
         # ORFs *must* have starts => searching for a TSS exon/CBG
-        elegiable_orfs = inputdict[org]['orfs'].get_elegiable_orfs(
+        elegiable_orfs = inputdict[org]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin,
                 max_orf_start = nextMax,
                 has_starts=True
@@ -1306,13 +1306,13 @@ def create_hmmdb_for_neighbouring_cbgs(
 
         # get elegiable sets of orfs from prev and next
         if not orf_must_have_start:
-            elegiable_orfs = inputdict[org]['orfs'].get_elegiable_orfs(
+            elegiable_orfs = inputdict[org]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin,
                 max_orf_start = nextMax
                 )
         else:
             # ORFs *must* have starts => searching for a TSS exon/CBG
-            elegiable_orfs = inputdict[org]['orfs'].get_elegiable_orfs(
+            elegiable_orfs = inputdict[org]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin,
                 max_orf_start = nextMax,
                 has_starts=True
@@ -1435,13 +1435,13 @@ def hmmsearch_results_for_inwpcbg(inwpcbg, inputdict, org, prev, next,
 
     # get elegiable sets of orfs from prev and next
     if not orf_must_have_start:
-        elegiable_orfs = inputdict[org]['orfs'].get_elegiable_orfs(
+        elegiable_orfs = inputdict[org]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin,
                 max_orf_start = nextMax
                 )
     else:
         # ORFs *must* have starts => searching for a TSS exon/CBG
-        elegiable_orfs = inputdict[org]['orfs'].get_elegiable_orfs(
+        elegiable_orfs = inputdict[org]['orfs'].get_eligible_orfs(
                 min_orf_end = prevMin,
                 max_orf_start = nextMax,
                 has_starts=True
