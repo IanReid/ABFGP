@@ -69,13 +69,32 @@ if __name__ == '__main__':
                 attributes = '\tgene_id "%s"; name "%s"; transcriptId "%s"' %(seq_id,seq_id,seq_id)
                 start_codon = str(transcript.make_start_codon()).rsplit('\t',1)[0] + attributes
                 stop_codon = str(transcript.make_stop_codon()).rsplit('\t',1)[0] + attributes
+
+                # ABFGP wants to see CDS lines
+                # We assume that if any CDS exon is present, they all are
+                # Otherwise we make CDS lines from the exon lines
+                CDSpresent = any([exon.get_type() == 'CDS' for exon in transcript.get_exons()])
+                CDSstart = CDSend = -1
                 if transcript.get_strand() == '-':
                     print >> geneout, stop_codon
+                    CDSstart = transcript.get_CDS_stop()
+                    CDSend = transcript.get_CDS_start()
                 else:
                     print >> geneout,start_codon
+                    CDSstart = transcript.get_CDS_stop()
+                    CDSend = transcript.get_CDS_start()
+
                 for exon in sorted(transcript.get_exons()):
                     exon_str = str(exon).rsplit('\t',1)[0] + attributes
                     print >> geneout, exon_str
+                    if not CDSpresent and exon.get_start() < CDSend and exon.get_end() > CDSstart:
+                        cds = exon.clone()
+                        cds.set_type('CDS')
+                        cds.set_start(max(CDSstart, cds.get_start()))
+                        cds.set_end(min(CDSend,cds.get_end()))
+                        cds_str = str(cds).rsplit('\t',1)[0] + attributes
+                        print >> geneout, cds_str
+
                 if transcript.get_strand() == '-':
                     print >> geneout, start_codon
                 else:
